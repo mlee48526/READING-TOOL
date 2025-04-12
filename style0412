@@ -1,0 +1,381 @@
+/* E-Book Viewer 기본 스타일 */
+:root {
+  --ebook-primary: #7b68ee;
+  --ebook-secondary: #5d4fd5;
+  --ebook-accent: #ff7f50;
+  --ebook-background: rgba(30, 30, 40, 0.95);
+  --ebook-surface: rgba(45, 45, 60, 0.9);
+  --ebook-text: #e8e8e8;
+  --ebook-text-secondary: #b0b0b0;
+  --ebook-border: rgba(100, 100, 120, 0.3);
+  --ebook-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --ebook-transition: all 0.3s ease;
+}
+
+/* 툴바 스타일 */
+.ebook-toolbar {
+  display: flex;
+  padding: 10px 15px;
+  background-color: var(--ebook-background);
+  border-bottom: 1px solid var(--ebook-border);
+  gap: 10px;
+  box-shadow: var(--ebook-shadow);
+  z-index: 100;
+  position: sticky;
+  top: 0;
+  transition: var(--ebook-transition);
+  backdrop-filter: blur(5px);
+}
+
+.toolbar-button {
+  background-color: var(--ebook-surface);
+  color: var(--ebook-text);
+  border: none;
+  border-radius: 6px;
+  padding: 10px;
+  cursor: pointer;
+  position: relative;
+  transition: var(--ebook-transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+}
+
+.toolbar-button:hover {
+  background-color: var(--ebook-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.toolbar-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.toolbar-button i {
+  font-size: 16px;
+}
+
+.toolbar-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* 사이드바 스타일 */
+#eBookSidebar {
+  background-color: var(--ebook-background);
+  border-radius: 10px;
+  box-shadow: var(--ebook-shadow);
+  min-width: 320px;
+  max-width: 420px;
+  height: 70vh;
+  display: none;
+  border: 1px solid var(--ebook-border);
+  transition: var(--ebook-transition);
+  overflow: hidden;
+}
+
+#eBookSidebar.visible {
+  display: block;
+  animation: slide-in 0.3s ease forwards;
+}
+
+@keyframes slide-in {
+  from { transform: translateX(20px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+.ebook-tabs {
+  display: flex;
+  background-color: var(--ebook-surface);
+  border-bottom: 1px solid var(--ebook-border);
+  padding: 0 10px;
+}
+
+.ebook-tab {
+  padding: 15px 20px;
+  cursor: pointer;
+  color: var(--ebook-text-secondary);
+  font-weight: 500;
+  transition: var(--ebook-transition);
+  position: relative;
+  text-align: center;
+  flex: 1;
+}
+
+.ebook-tab:hover {
+  color: var(--ebook-text);
+  background-color: rgba(123, 104, 238, 0.1);
+}
+
+.ebook-tab.active {
+  color: var(--ebook-primary);
+}
+
+.ebook-tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: var(--ebook-primary);
+  border-radius: 3px 3px 0 0;
+}
+
+.ebook-sidebar-content {
+  padding: 20px;
+  overflow-y: auto;
+  height: calc(100% - 110px);
+  scrollbar-width: thin;
+  scrollbar-color: var(--ebook-primary) var(--ebook-surface);
+}
+
+.ebook-sidebar-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.ebook-sidebar-content::-webkit-scrollbar-track {
+  background: var(--ebook-surface);
+}
+
+.ebook-sidebar-content::-webkit-scrollbar-thumb {
+  background-color: var(--ebook-primary);
+  border-radius: 6px;
+}
+
+/* 항목 스타일 */
+.ebook-item {
+  margin-bottom: 15px;
+  padding: 15px;
+  border-radius: 8px;
+  background-color: var(--ebook-surface);
+  position: relative;
+  transition: var(--ebook-transition);
+  border-left: 4px solid var(--ebook-primary);
+}
+
+.ebook-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.ebook-item-text {
+  margin-bottom: 10px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--ebook-text);
+  word-break: break-word;
+}
+
+.ebook-item-meta {
+  font-size: 12px;
+  color: var(--ebook-text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ebook-item-meta i {
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+.ebook-item-actions {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  gap: 8px;
+  opacity: 0;
+  transition: var(--ebook-transition);
+}
+
+.ebook-item:hover .ebook-item-actions {
+  opacity: 1;
+}
+
+.ebook-item-action {
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--ebook-text-secondary);
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: rgba(45, 45, 60, 0.7);
+  transition: var(--ebook-transition);
+}
+
+.ebook-item-action:hover {
+  color: var(--ebook-text);
+  background-color: var(--ebook-primary);
+}
+
+/* 하이라이트 스타일 */
+.highlight-yellow {
+  background-color: rgba(255, 255, 0, 0.4);
+  border-radius: 2px;
+  padding: 0 2px;
+  transition: var(--ebook-transition);
+}
+
+.highlight-green {
+  background-color: rgba(144, 238, 144, 0.4);
+  border-radius: 2px;
+  padding: 0 2px;
+  transition: var(--ebook-transition);
+}
+
+.highlight-blue {
+  background-color: rgba(173, 216, 230, 0.4);
+  border-radius: 2px;
+  padding: 0 2px;
+  transition: var(--ebook-transition);
+}
+
+.highlight-pink {
+  background-color: rgba(255, 182, 193, 0.4);
+  border-radius: 2px;
+  padding: 0 2px;
+  transition: var(--ebook-transition);
+}
+
+.highlight-purple {
+  background-color: rgba(230, 230, 250, 0.4);
+  border-radius: 2px;
+  padding: 0 2px;
+  transition: var(--ebook-transition);
+}
+
+/* 하이라이트 호버 효과 */
+.highlight-yellow:hover,
+.highlight-green:hover,
+.highlight-blue:hover,
+.highlight-pink:hover,
+.highlight-purple:hover {
+  filter: brightness(1.1);
+}
+
+/* 노트 마커 스타일 */
+.note-marker {
+  background-color: rgba(255, 245, 157, 0.4);
+  border-bottom: 1px dotted #FFA000;
+  border-radius: 2px;
+  cursor: help;
+  padding: 0 2px;
+  position: relative;
+  transition: var(--ebook-transition);
+}
+
+.note-marker:hover {
+  background-color: rgba(255, 245, 157, 0.6);
+}
+
+.note-marker::after {
+  content: '📝';
+  font-size: 10px;
+  position: absolute;
+  top: -10px;
+  right: -5px;
+}
+
+/* 북마크 마커 스타일 */
+.bookmark-marker {
+  position: relative;
+}
+
+.bookmark-marker::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  right: -5px;
+  width: 10px;
+  height: 16px;
+  background-color: var(--ebook-accent);
+  clip-path: polygon(0 0, 100% 0, 100% 70%, 50% 100%, 0 70%);
+  transition: var(--ebook-transition);
+}
+
+/* 색상 선택기 스타일 */
+.color-selector {
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 0;
+  display: none;
+  background-color: var(--ebook-surface);
+  border: 1px solid var(--ebook-border);
+  border-radius: 8px;
+  padding: 10px;
+  z-index: 1000;
+  box-shadow: var(--ebook-shadow);
+}
+
+.color-selector.visible {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  animation: fade-in 0.2s ease;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.color-option {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: var(--ebook-transition);
+}
+
+.color-option:hover {
+  transform: scale(1.1);
+}
+
+.color-option.selected {
+  border-color: white;
+  box-shadow: 0 0 0 2px var(--ebook-primary);
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  #eBookSidebar {
+    min-width: 280px;
+    max-width: 320px;
+  }
+
+  .ebook-toolbar {
+    padding: 8px;
+    gap: 5px;
+  }
+
+  .toolbar-button {
+    width: 36px;
+    height: 36px;
+    padding: 8px;
+  }
+
+  .ebook-tab {
+    padding: 12px 15px;
+    font-size: 14px;
+  }
+}
+
+/* 다크/라이트 모드 자동 감지 */
+@media (prefers-color-scheme: light) {
+  :root {
+    --ebook-background: rgba(245, 245, 250, 0.95);
+    --ebook-surface: rgba(255, 255, 255, 0.9);
+    --ebook-text: #303040;
+    --ebook-text-secondary: #606070;
+    --ebook-border: rgba(100, 100, 120, 0.2);
+  }
+}
