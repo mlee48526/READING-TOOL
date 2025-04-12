@@ -1,0 +1,11 @@
+{
+    "display_name": "READING-TOOL",
+    "loading_order": 100,
+    "requires": [],
+    "optional": [],
+    "js": "index.js",
+    "author": "mlee48526",
+    "version": "1.0.0",
+    "homePage": "https://github.com/mlee48526/READING-TOOL",
+    "auto_update": true
+}
